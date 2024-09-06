@@ -1,13 +1,15 @@
 import streamlit as st  
   
+st.set_page_config(page_title="Time to Distance Converter", layout="centered")  
+  
 st.title("Convert Time to Distance Driven")  
   
 # Create two columns for input and unit selection  
 col1, col2 = st.columns(2)  
   
 with col1:  
-    # Input for time duration  
-    time_duration = st.number_input("Enter time:", min_value=0.0, value=2.0)  
+    # Input for time duration without decimal points  
+    time_duration = st.number_input("Enter time:", min_value=0, value=2, step=1, format="%d")  
   
 with col2:  
     # Select the unit of time  
@@ -37,15 +39,27 @@ def calculate_distance(time, unit):
             speed = 70  
         return time * speed  
     elif unit == 'days':  
-        # Assuming constant speed of 70 mph  
-        speed = 70 * 24  # converting to miles per day  
+        # Assuming constant speed of 70 mph during daytime (12 hours)  
+        speed = 70 * 12  # converting to miles per day (daytime only)  
         return time * speed  
   
 # Calculate distance based on input  
 distance = calculate_distance(time_duration, unit)  
   
-# Button to trigger conversion  
-if st.button("Convert"):  
-    st.write(f"Distance Driven: {distance:.2f} miles")  
+# Display the result automatically  
+st.header("Conversion Result")  
+st.write(f"Distance Driven: {distance:.2f} miles")  
   
-st.header("Conversion")  
+# Add some style to the app  
+st.markdown("""  
+    <style>  
+    .css-18e3th9 {  
+        padding: 2rem 1rem;  
+    }  
+    .stButton button {  
+        background-color: #4CAF50;  
+        color: white;  
+        border-radius: 5px;  
+    }  
+    </style>  
+    """, unsafe_allow_html=True)  
