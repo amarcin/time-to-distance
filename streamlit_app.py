@@ -13,7 +13,7 @@ with col1:
   
 with col2:  
     # Select the unit of time  
-    unit = st.selectbox("Select unit of time:", ['seconds', 'minutes', 'hours', 'days'], index=1)  
+    unit = st.selectbox("Select unit of time:", ['seconds', 'minutes', 'hours', 'days'], index=2)  
   
 # Function to calculate distance based on time and unit  
 def calculate_distance(time, unit):  
