@@ -1,5 +1,5 @@
 import streamlit as st  
-  
+
 st.set_page_config(page_title="Time to Distance Converter", layout="centered")  
   
 st.title("Convert Time to Distance Driven")  
@@ -19,18 +19,15 @@ with col2:
 def calculate_distance(time, unit):  
     # Define speed limits for different time periods  
     if unit == 'seconds':  
-        # Assuming speed is constant at 5 mph for simplicity  
         speed = 5 / 3600  # converting to miles per second  
         return time * speed  
     elif unit == 'minutes':  
-        # 0-20 minutes: 30 mph, 20+ minutes: 60 mph  
         if time <= 20:  
             speed = 30 / 60  # converting to miles per minute  
         else:  
             speed = 60 / 60  # converting to miles per minute  
         return time * speed  
     elif unit == 'hours':  
-        # 0-1 hour: 50 mph, 1-10 hours: 65 mph, 10+ hours: 70 mph  
         if time <= 1:  
             speed = 50  
         elif time <= 10:  
@@ -39,27 +36,17 @@ def calculate_distance(time, unit):
             speed = 70  
         return time * speed  
     elif unit == 'days':  
-        # Assuming constant speed of 70 mph during daytime (12 hours)  
         speed = 70 * 12  # converting to miles per day (daytime only)  
         return time * speed  
   
 # Calculate distance based on input  
 distance = calculate_distance(time_duration, unit)  
   
-# Display the result automatically  
-st.header("Conversion Result")  
-st.write(f"Distance Driven: {distance:.2f} miles")  
+# Inputs for cost calculation  
+st.subheader("Cost Calculation")  
   
-# Add some style to the app  
-st.markdown("""  
-    <style>  
-    .css-18e3th9 {  
-        padding: 2rem 1rem;  
-    }  
-    .stButton button {  
-        background-color: #4CAF50;  
-        color: white;  
-        border-radius: 5px;  
-    }  
-    </style>  
-    """, unsafe_allow_html=True)  
+fuel_type = st.radio("Select vehicle type:", ['Gas', 'Electric'])  
+if fuel_type == 'Gas':  
+    mpg = st.number_input("Enter miles per gallon (mpg):", min_value=1.0, value=25.0)  
+    cost_per_gallon = st.number_input("Enter cost per gallon ($):", min_value=0.0, value=3.0)  
+   

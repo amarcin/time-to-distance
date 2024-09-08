@@ -2,7 +2,7 @@
 
 This Streamlit app allows users to convert a given time duration into the equivalent distance that a car would travel, based on predefined speed assumptions for different time intervals.
 
-Open tool here: https://timedistance.streamlit.app
+Open tool here: https://time-to-distance.streamlit.app
 
 ## Features
 
